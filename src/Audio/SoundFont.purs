@@ -45,10 +45,6 @@ foreign import getCurrentTime
 
 foreign import loadPianoSoundFontImpl :: forall e. String -> (Boolean -> Eff e Unit) -> Eff e Unit
 
-{-}
-foreign import loadRemoteSoundFontImpl :: forall e. String -> (Boolean -> Eff e Unit) -> Eff e Unit
--}
-
 foreign import loadRemoteSoundFontsImpl :: forall e. Array String -> (Boolean -> Eff e Unit) -> Eff e Unit
 
 -- | play a note asynchronously
@@ -62,13 +58,8 @@ loadPianoSoundFont dir =
 
 -- | load a soundfont for a particular instrument from the remote Gleitz Github server
 loadRemoteSoundFont :: forall e. String -> Aff e Boolean
-{-
-loadRemoteSoundFont instrument =
-  makeAff (\error success -> (loadRemoteSoundFontImpl instrument) success)
--}
 loadRemoteSoundFont s =
   loadRemoteSoundFonts [s]
-
 
 -- | load soundfonts for a bunch of instruments from the remote Gleitz Github server
 loadRemoteSoundFonts :: forall e. Array String -> Aff e Boolean
