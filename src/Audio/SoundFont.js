@@ -56,9 +56,10 @@ var sf = function() {
           Soundfont.instrument (sf.context, name, { destination: vca }).then (function (instrument) {
             console.log('Loaded from: ', instrument.url)
             instruments[index] = instrument;
+            callback(true)();
           });
           sf.instruments = instruments;
-          callback(true)();
+          // callback(true)();
         });
       },
       loadPianoSoundFontImpl : function(dirname) {
