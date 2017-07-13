@@ -59,10 +59,10 @@ var PS = {};
             Soundfont.instrument (sf.context, name, { destination: vca }).then (function (instrument) {
               console.log('Loaded from: ', instrument.url)
               instruments[index] = instrument;
-              callback(true)();
+              // callback(true)();
+              callback ({ instrument : name, channel : index }) ();
             });
             sf.instruments = instruments;
-            // callback(true)();
           });
         },
         loadPianoSoundFontImpl : function(dirname) {
