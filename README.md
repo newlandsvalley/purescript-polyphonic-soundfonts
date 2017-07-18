@@ -20,14 +20,15 @@ We specify a duration for the note which will allow you to play staccato sequenc
 
 ## Build
 
-     npm install -g pulp purescript
-     bower install
-     pulp build
+Node and npm installed is required. Then run:
+
+     npm install
+     npm run build
 
 ## Example
 
 To build an example that runs in the browser:
 
-     ./buildExample.sh
+    npm run build-example
 
 and then navigate to /example/dist/index.html
