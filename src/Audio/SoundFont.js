@@ -44,8 +44,7 @@ var sf = function() {
          }
       },
     _loadSoundFonts : function (names, callback) {
-        console.log ("load instruments: " + names);
-
+        // console.log ("load instruments: " + names);
         var vca = sf.context.createGain();
         vca.gain.value = 1;
         vca.connect(sf.context.destination);
@@ -103,7 +102,7 @@ var sf = function() {
       _playNote : function (midiNote) {
         if (sf.instruments) {
           var inst = instruments[midiNote.channel];
-          console.log ("instrument:" + inst + " for channel " + midiNote.channel + " note: " + midiNote.id);
+          // console.log ("instrument:" + inst + " for channel " + midiNote.channel + " note: " + midiNote.id);
           if (inst) {
             var buffer = inst.buffers[midiNote.id];
             var source = sf.context.createBufferSource();
@@ -120,12 +119,12 @@ var sf = function() {
             return midiNote.timeOffset + midiNote.duration;
           }
           else {
-            console.log("no instrument")
+            console.log("no instrument for channel " + midinote.channel );
             return 0.0;
           }
         }
         else {
-          console.log("no instruments")
+          console.log("no instruments loaded");
           return 0.0;
         }
       }
