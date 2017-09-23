@@ -1,15 +1,15 @@
 module Main where
 
 import Prelude
-import Audio.SoundFont (AUDIO, MidiNote,
+import Audio.SoundFont (AUDIO, LoadResult, MidiNote,
                    canPlayOgg, isWebAudioEnabled,
                    loadPianoSoundFont, loadRemoteSoundFonts, playNote, playNotes)
 import Control.Monad.Eff (Eff)
-import Control.Monad.Eff.Console (CONSOLE, log)
+import Control.Monad.Eff.Console (CONSOLE, log, logShow)
 import Control.Monad.Eff.Exception (EXCEPTION, Error)
 import Data.Time.Duration (Milliseconds(..))
 import Data.Either (Either)
-import Control.Monad.Aff (Aff, launchAff, liftEff', delay)
+import Control.Monad.Aff (Aff, launchAff, liftEff', runAff, delay)
 
 note :: Int -> Int -> Number -> Number -> Number -> MidiNote
 note channel id timeOffset duration gain =
@@ -79,7 +79,7 @@ testPolyphony ::
           Unit
 testPolyphony =
   do
-    _ <- launchAff (loadRemoteSoundFonts ["violin", "viola"])
+    _ <- runAff logError logFontLoad (loadRemoteSoundFonts ["violin", "viola"])
     _ <- launchAff polyphony
     log "polyphony setup finished"
 
@@ -94,7 +94,7 @@ testMonophony ::
           Unit
 testMonophony =
   do
-    _ <- launchAff (loadPianoSoundFont "soundfonts")
+    _ <- runAff logError logFontLoad (loadPianoSoundFont "soundfonts")
     _ <- launchAff monophony
     log "monophony setup finished"
 
@@ -142,3 +142,10 @@ polyphony =
       _ <- playNote voice2sample3
       _ <- playNote voice2sample4
       log "finished"
+
+logError :: ∀ e. Error -> Eff (console :: CONSOLE | e)  Unit
+logError = logShow
+
+logFontLoad  :: ∀ e. LoadResult -> Eff (console :: CONSOLE | e)  Unit
+logFontLoad lr =
+  log $ lr.instrument <> " soundfont loaded to channel " <> (show lr.channel)
