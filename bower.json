@@ -1,5 +1,5 @@
 {
-  "name": "purescript-soundfonts",
+  "name": "purescript-polyphonic-soundfonts",
   "ignore": [
     "**/.*",
     "node_modules",
