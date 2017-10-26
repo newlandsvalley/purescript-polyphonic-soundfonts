@@ -1,6 +1,8 @@
 purescript-polyphonic-soundfonts
 ================================
 
+__Deprecated in favour of purescript-soundfonts__ (which is a re-write in more-or-less pure PureScript and is a drop-in replacement).
+
 This is a PureScript wrapper for danigb's soundfont project: [soundfont-player](https://github.com/danigb/soundfont-player). It differs from [purescript-soundfonts](https://github.com/newlandsvalley/purescript-soundfonts) in that it allows soundfonts for multiple instruments to reside in memory at the same time - i.e. it allows for polyphonic music. It also uses the latest version of danigb's soundfont-player. Eventually purescript-soundfonts will be deprecated in favour of this library.  
 
 
